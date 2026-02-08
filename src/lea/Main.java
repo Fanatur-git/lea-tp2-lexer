@@ -1,3 +1,9 @@
+/*
+ * SPDX-License-Identifier: MIT
+ * Author: Matthieu Perrin
+ * Session: Introduction to JFlex
+ */
+
 package lea;
 
 import java.io.*;
@@ -31,20 +37,23 @@ public class Main {
 
 	static void readString(String input) throws Exception {
 
-		Reader reader = new StringReader(input);
-		Lexer lexer = new Lexer(reader);
+		Reader reader = new StringReader(input);    // Texte à analyser
+		Reporter reporter = new Reporter();         // Gestion des erreurs
+		Lexer lexer = new Lexer(reader, reporter);  // Analyseur
 
 		for(Token token = lexer.yylex(); token != null; token = lexer.yylex()) {
 
-			System.out.println(token);
 			String output = switch (token) {
 			case Token.KeyWord t       -> BOLD + FG_BLUE + token.text() + RESET;
 			case Token.Number t        -> FG_CYAN + token.text() + RESET;
 			default                    -> token.text();
 			};
-			//output=token.toString(); // décommenter si votre terminal ne permet pas l'affichage des couleurs
+			//output=token.toString(); // décommenter si votre terminal ne supporte pas l'affichage des couleurs
+
 			System.out.print(output);
 		}
+		
+		reporter.reportErrors();
 	}
 
 }

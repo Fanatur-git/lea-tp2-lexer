@@ -28,7 +28,7 @@ and related teaching materials.
 │       └── Token.java    # Token interface and variants
 ├── gen/                  # Generated sources (lexer)
 ├── build/                # Compiled main classes
-└── test/                 # (Optional) test files or example inputs
+└── test/                 # Test files or example inputs
 ```
 
 Generated directories (`gen/`, `build/`) are produced automatically and should not be edited manually.
@@ -69,6 +69,12 @@ This command:
 
 ⚠️ After **each modification** of `Lexer.flex`, the project must be regenerated and recompiled.
 
+- Run the test suite
+
+```bash
+ant test
+```
+
 - Run the lexer on the default input:
 
 ```bash
@@ -91,7 +97,7 @@ The program reads a sample input string, runs the lexer, and prints the recogniz
 All dependencies are provided in the `lib/` directory:
 
 - **JFlex** — lexer generation  
-- **JUnit** — testing support (used in later TPs)
+- **JUnit** — testing support
 
 No external installation is required beyond a JDK and Ant.
 
@@ -101,9 +107,9 @@ No external installation is required beyond a JDK and Ant.
 
 All **source code** in this repository is distributed under the **MIT License**.
 
-- The full legal text is available in [`LICENSE.txt`](LICENSE.txt).
+- The full legal text is available in [LICENSE.txt](LICENSE.txt).
 - Organization-wide licensing details and attributions are documented in  
-  https://github.com/LangagesEtAutomates/.github/blob/main/LICENSE.md
+  [https://github.com/LangagesEtAutomates/.github/blob/main/LICENSE.md](https://github.com/LangagesEtAutomates/.github/blob/main/LICENSE.md)
 
 This license applies to all Java sources, grammar files (`.flex`),
 and supporting code in this repository.
