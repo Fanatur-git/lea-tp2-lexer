@@ -35,6 +35,7 @@ package lea;
    */
   private void error(String message) {
     reporter.error(new Reporter.Span(yyline+1, yycolumn+1, yylength()), message);
+    
   }
   
 %}
@@ -45,10 +46,24 @@ DIGIT = [0-9]
 
 "si"						{ return new Token.KeyWord(yytext()); }
 "sinon"						{ return new Token.KeyWord(yytext()); }
+\"([^\"\\\n]|\\.)*\" { return new Token.StringLiteral(yytext()); }
+\"([^\"\\\n]|\\.)*  { error("caractère inattendu " + yytext()); }
+
 {DIGIT}+					{ return new Token.Number(yytext()); }
+[A-Za-z_][A-Za-z0-9_]* { return new Token.Identifier(yytext()); }
+"+"					{ return new Token.Operator(yytext()); }
+"-"					{ return new Token.Operator(yytext()); }
+"*"					{ return new Token.Operator(yytext()); }
+'(\\.|[^’\\\n])'					{ return new Token.CharLiteral(yytext()); }
+
+[ \t\n]+                {System.out.print(Main.FG_GRAY + "·" + Main.RESET);}
+
+
+
+
 
  /* Suppression de caractères qui n'ont pas de rôle sémantique */
 \/\/.*						{ /* One-line comments */ }
 \/\*([^\*]|\*[^\/])*\*\/	{ /* Multi-line comments */ }
 
-[^]							{ System.out.print(Main.FG_GRAY + yytext() + Main.RESET); }
+[^]							{ error("caractère inattendu "+ yytext());}
